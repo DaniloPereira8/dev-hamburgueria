@@ -1,3 +1,16 @@
+// export const configDatabase = {
+//   dialect: 'postgres',
+//   host: 'localhost',
+//   username: 'postgres',
+//   password: 'postgres',
+//   database: 'code-burger',
+//   define: {
+//     timestamps: true,
+//     underscored: true,
+//     underscoredAll: true,
+//   },
+// };
+
 module.exports = {
   dialect: 'postgres',
   host: 'localhost',
@@ -5,7 +18,7 @@ module.exports = {
   password: 'postgres',
   database: 'code-burger',
   define: {
-    timespamps: true,
+    timestamps: true,
     underscored: true,
     underscoredAll: true,
   },

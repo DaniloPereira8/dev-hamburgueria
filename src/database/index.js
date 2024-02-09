@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 
-import User from '../app/models/User'
-import configDatabase from '../config/database'
+import User from '../app/models/User.js'
+import configDatabase from '../config/database.js';
 
 const models = [User]
 
@@ -17,3 +17,4 @@ class Database {
 }
 
 export default new Database()
+

@@ -2,6 +2,7 @@ import { Router } from 'express'
 import multer from 'multer'
 import multerConfig from './config/multer'
 import CategoryController from './app/controllers/CategoryController'
+import OrderController from './app/controllers/OrderController'
 
 import UserController from './app/controllers/UserController'
 import SessionController from './app/controllers/SessionController'
@@ -21,5 +22,9 @@ routes.get('/products', authMiddleware, ProductsController.index)
 
 routes.post('/categories', CategoryController.store)
 routes.get('/categories', CategoryController.index)
+
+routes.post('/orders', OrderController.store)
+routes.get('/orders', OrderController.index)
+routes.put('/orders/:id', OrderController.update)
 
 export default routes

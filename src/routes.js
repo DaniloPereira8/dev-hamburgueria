@@ -18,10 +18,12 @@ routes.post('/sessions', SessionController.store)
 routes.use(authMiddleware) // seta chamado por todasas rotas ABAIXO.
 
 routes.post('/products', upload.single('file'), ProductsController.store)
-routes.get('/products', authMiddleware, ProductsController.index)
+routes.get('/products', ProductsController.index)
+routes.put('/products/:id', upload.single('file'), ProductsController.update)
 
-routes.post('/categories', CategoryController.store)
+routes.post('/categories', upload.single('file'), CategoryController.store)
 routes.get('/categories', CategoryController.index)
+routes.put('/categories/id', upload.single('file'), CategoryController.update)
 
 routes.post('/orders', OrderController.store)
 routes.get('/orders', OrderController.index)

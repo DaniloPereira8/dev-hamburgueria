@@ -7,13 +7,11 @@ const OrderSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
-
       name: {
         type: String,
-        required: true,
+        require: true,
       },
     },
-
     products: [
       {
         id: {
@@ -22,10 +20,10 @@ const OrderSchema = new mongoose.Schema(
         },
         name: {
           type: String,
-          required: true,
+          require: true,
         },
         price: {
-          type: Number,
+          type: String,
           required: true,
         },
         category: {

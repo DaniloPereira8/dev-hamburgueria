@@ -1,15 +1,15 @@
 import { Router } from 'express'
 import multer from 'multer'
 import multerConfig from './config/multer'
+
 import CategoryController from './app/controllers/CategoryController'
 import OrderController from './app/controllers/OrderController'
-
 import UserController from './app/controllers/UserController'
 import SessionController from './app/controllers/SessionController'
 import ProductsController from './app/controllers/ProductsController'
 import authMiddleware from './app/middlewares/auth'
+
 const upload = multer(multerConfig)
-// import User from './app/models/User'
 const routes = new Router()
 
 routes.post('/users', UserController.store)
@@ -23,7 +23,7 @@ routes.put('/products/:id', upload.single('file'), ProductsController.update)
 
 routes.post('/categories', upload.single('file'), CategoryController.store)
 routes.get('/categories', CategoryController.index)
-routes.put('/categories/id', upload.single('file'), CategoryController.update)
+routes.put('/categories/:id', upload.single('file'), CategoryController.update)
 
 routes.post('/orders', OrderController.store)
 routes.get('/orders', OrderController.index)

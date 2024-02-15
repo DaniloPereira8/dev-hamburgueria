@@ -2,88 +2,79 @@ import * as Yup from 'yup'
 import Category from '../models/Category'
 import User from '../models/User'
 class CategoryController {
-  async store(request, response) {
+  async store(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+    })
+
     try {
-      const schema = Yup.object().shape({
-        name: Yup.string().required(),
-      })
-
-      try {
-        await schema.validateSync(request.body, { abortEarly: false })
-      } catch (err) {
-        return response.status(400).json({ error: err.errors })
-      }
-      const { admin: isAdmin } = await User.findByPk(request.userId)
-
-      if (!isAdmin) {
-        return response.status(401).json()
-      }
-
-      const { name } = request.body
-
-      const { filename: path } = request.file
-
-      const categoryExists = await Category.findOne({
-        where: {
-          name,
-        },
-      })
-
-      if (categoryExists) {
-        return response.status(400).json({ error: 'Essa categoria já existe' })
-      }
-
-      const { id } = await Category.create({ name, path })
-
-      return response.json({ id, name })
+      await schema.validateSync(req.body, { abortEarly: false })
     } catch (err) {
-      console.log(err)
+      return res.status(400).json({ error: err.errors })
     }
+
+    const { admin: isAdmin } = await User.findByPk(req.userId)
+    if (!isAdmin) {
+      return res.status(401).json()
+    }
+
+    const { name } = req.body
+
+    const { filename: path } = req.file
+
+    const categoryExists = await Category.findOne({
+      where: { name },
+    })
+    if (categoryExists) {
+      return res.status(400).json({ error: 'Category already exists' })
+    }
+
+    const { id } = await Category.create({ name, path })
+    return res.json({ name, id })
   }
 
-  async index(request, response) {
+  async index(req, res) {
     const category = await Category.findAll()
 
-    return response.json(category)
+    return res.json(category)
   }
 
-  async update(request, response) {
+  async update(req, res) {
     try {
       const schema = Yup.object().shape({
         name: Yup.string(),
       })
 
       try {
-        await schema.validateSync(request.body, { abortEarly: false })
+        await schema.validateSync(req.body, { abortEarly: false })
       } catch (err) {
-        return response.status(400).json({ error: err.errors })
+        return res.status(400).json({ error: err.errors })
       }
-      const { admin: isAdmin } = await User.findByPk(request.userId)
 
+      const { admin: isAdmin } = await User.findByPk(req.userId)
       if (!isAdmin) {
-        return response.status(401).json()
+        return res.status(401).json()
       }
 
-      const { name } = request.body
+      const { name } = req.body
 
-      const { id } = request.params
+      const { id } = req.params
 
       const category = await Category.findByPk(id)
 
       if (!category) {
-        return response
+        return res
           .status(401)
-          .json({ error: 'Certifique-se de que o Id esta correto ' })
+          .json({ error: 'Make sure your category ID is correct' })
       }
 
       let path
-      if (request.file) {
-        path = request.file.filename
+      if (req.file) {
+        path = req.file.filename
       }
 
       await Category.update({ name, path }, { where: { id } })
-
-      return response.status(200).json()
+      return res.status(200).json({ name, id })
     } catch (err) {
       console.log(err)
     }

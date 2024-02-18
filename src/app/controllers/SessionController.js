@@ -10,30 +10,36 @@ class SessionController {
       password: Yup.string().required(),
     })
 
-    const emailAndPasswordVerification = () => {
-      return response.status(400).json({
+    // const emailAndPasswordVerification = () => {
+    //   return response.status(400).json({
+    //     error:
+    //       'Email ou senha incorretos, verifique os dados e tente novamente.',
+    //   })
+    // }
+
+    const { email, password } = request.body
+
+    if (!(await schema.isValid(request.body)))
+      return response.status(401).json({
         error:
           'Email ou senha incorretos, verifique os dados e tente novamente.',
       })
-    }
-
-    if (!(await schema.isValid(request.body))) {
-      emailAndPasswordVerification()
-    }
-
-    const { email, password } = request.body
 
     const user = await User.findOne({
       where: { email },
     })
 
-    if (!user) {
-      emailAndPasswordVerification()
-    }
+    if (!user)
+      return response.status(401).json({
+        error:
+          'Email ou senha incorretos, verifique os dados e tente novamente.',
+      })
 
-    if (!(await user.checkPassword(password))) {
-      emailAndPasswordVerification()
-    }
+    if (!(await user.checkPassword(password)))
+      return response.status(401).json({
+        error:
+          'Email ou senha incorretos, verifique os dados e tente novamente.',
+      })
 
     return response.json({
       id: user.id,

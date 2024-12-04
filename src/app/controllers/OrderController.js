@@ -101,7 +101,7 @@ class OrderController {
       return response.status(400).json({ error: error.message })
     }
 
-    return response.json({ message: 'Status atuaizado com sucesso' })
+    return response.json({ message: 'Status atualizado com sucesso' })
   }
 }
 

@@ -10,13 +10,6 @@ class SessionController {
       password: Yup.string().required(),
     })
 
-    // const emailAndPasswordVerification = () => {
-    //   return response.status(400).json({
-    //     error:
-    //       'Email ou senha incorretos, verifique os dados e tente novamente.',
-    //   })
-    // }
-
     const { email, password } = request.body
 
     if (!(await schema.isValid(request.body)))

@@ -1,7 +1,8 @@
 import * as Yup from 'yup'
 import Product from '../models/Product'
-import category from '../models/Category'
+import Category from '../models/Category'
 import User from '../models/User'
+
 class ProductController {
   async store(request, response) {
     const schema = Yup.object().shape({
@@ -45,7 +46,7 @@ class ProductController {
     const products = await Product.findAll({
       include: [
         {
-          model: category,
+          model: Category,
           as: 'category',
           attributes: ['id', 'name'],
         },

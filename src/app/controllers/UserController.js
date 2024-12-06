@@ -1,7 +1,8 @@
 import { v4 } from 'uuid'
 import * as Yup from 'yup'
-
+import jwt from 'jsonwebtoken'
 import User from '../models/User'
+import authConfig from '../../config/auth'
 
 class UserController {
   async store(request, response) {
@@ -36,7 +37,13 @@ class UserController {
       admin,
     })
 
-    return response.status(201).json({ id: user.id, name, email, admin })
+    const token = jwt.sign(
+      { id: user.id, name: user.name },
+      authConfig.secret,
+      { expiresIn: authConfig.expiresIn },
+    )
+
+    return response.status(201).json({ id: user.id, name, email, admin, token })
   }
 }
 

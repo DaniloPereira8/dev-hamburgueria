@@ -4,9 +4,9 @@ import mongoose from 'mongoose'
 import User from '../app/models/User.js'
 import configDatabase from '../config/database.js'
 import Product from '../app/models/Product.js'
-import category from '../app/models/Category.js'
+import Category from '../app/models/Category.js'
 
-const models = [User, Product, category]
+const models = [User, Product, Category]
 
 class Database {
   constructor() {

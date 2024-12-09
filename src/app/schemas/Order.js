@@ -11,6 +11,7 @@ const OrderSchema = new mongoose.Schema(
         type: String,
         require: true,
       },
+      _id: false,
     },
     products: [
       {
@@ -47,6 +48,7 @@ const OrderSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   },
 )
 

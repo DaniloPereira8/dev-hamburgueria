@@ -8,7 +8,7 @@ import './database'
 class App {
   constructor() {
     this.app = express()
-    this.app.use(cors())
+    this.app.use(cors()) // dentro tem que colocar por exemplo www.deuburger.com.br
 
     this.middlewares()
     this.routes()

@@ -1,9 +1,11 @@
+import dotenv from 'dotenv' // Isso carrega as variáveis do arquivo .env
 import express from 'express'
 import routes from './routes.js'
 import { resolve } from 'path'
 import cors from 'cors'
 
 import './database'
+dotenv.config()
 
 class App {
   constructor() {

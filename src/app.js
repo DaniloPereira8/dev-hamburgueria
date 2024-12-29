@@ -10,7 +10,20 @@ dotenv.config()
 class App {
   constructor() {
     this.app = express()
-    this.app.use(cors()) // dentro tem que colocar por exemplo www.deuburger.com.br
+
+    // Configuração do CORS
+    const corsOptions = {
+      origin:
+        process.env.NODE_ENV === 'production'
+          ? 'https://danilopereira8.github.io/caririflavorco/' // Substitua pelo domínio do seu frontend em produção
+          : 'http://localhost:5173', // URL do frontend local no desenvolvimento (Vite)
+      methods: 'GET,POST,PUT,DELETE', // Métodos permitidos
+      allowedHeaders: 'Content-Type,Authorization', // Cabeçalhos permitidos
+    }
+
+    // Aplicando o CORS
+
+    this.app.use(cors(corsOptions))
 
     this.middlewares()
     this.routes()

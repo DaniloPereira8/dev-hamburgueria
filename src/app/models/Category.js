@@ -15,6 +15,8 @@ class Category extends Model {
       },
       {
         sequelize,
+        tableName: 'categories',
+        underscored: true,
       },
     )
     return this

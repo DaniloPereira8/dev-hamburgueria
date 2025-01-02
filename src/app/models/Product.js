@@ -11,12 +11,14 @@ class Product extends Model {
         url: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `${process.env.BASE_URL}/product-file/${this.path}`
+            return `http://localhost:3001/product-file/${this.path}`
           },
         },
       },
       {
         sequelize,
+        tableName: 'products',
+        underscored: true,
       },
     )
     return this
@@ -32,6 +34,8 @@ class Product extends Model {
 }
 
 export default Product
+
+// sem modificações
 
 // import Sequelize, { Model } from 'sequelize'
 
@@ -58,6 +62,7 @@ export default Product
 //   }
 
 //   static associate(models) {
+//     // Configuração da relação com categorias
 //     this.belongsTo(models.Category, {
 //       foreignKey: 'category_id',
 //       as: 'category',

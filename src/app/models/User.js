@@ -13,6 +13,8 @@ class User extends Model {
       },
       {
         sequelize,
+        underscored: true, // Faz com que o Sequelize use snake_case automaticamente
+        tableName: 'users',
       },
     )
 

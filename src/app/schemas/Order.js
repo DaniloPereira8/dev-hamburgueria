@@ -9,7 +9,7 @@ const OrderSchema = new mongoose.Schema(
       },
       name: {
         type: String,
-        require: true,
+        required: true,
       },
       _id: false,
     },
@@ -24,7 +24,7 @@ const OrderSchema = new mongoose.Schema(
           required: true,
         },
         price: {
-          type: String,
+          type: Number,
           required: true,
         },
         category: {
@@ -41,6 +41,31 @@ const OrderSchema = new mongoose.Schema(
         },
       },
     ],
+    address: {
+      name: {
+        type: String,
+        required: true,
+      },
+      street: {
+        type: String,
+        required: true,
+      },
+      number: {
+        type: String,
+        required: true,
+      },
+      neighborhood: {
+        type: String,
+        required: true,
+      },
+      reference: {
+        type: String,
+      },
+      contact: {
+        type: String,
+        required: true,
+      },
+    },
     status: {
       type: String,
       required: true,

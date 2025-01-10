@@ -11,7 +11,9 @@ class Product extends Model {
         url: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3001/product-file/${this.path}`
+            const baseURL = 'https://cariri-flavor-co-api.onrender.com'
+
+            return `${baseURL}/product-file/${this.path}`
           },
         },
       },

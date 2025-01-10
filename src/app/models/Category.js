@@ -9,7 +9,9 @@ class Category extends Model {
         url: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `${process.env.BASE_URL}/category-file/${this.path}`
+            const baseURL = 'https://cariri-flavor-co-api.onrender.com'
+
+            return `${baseURL}/category-file/${this.path}`
           },
         },
       },

@@ -9,7 +9,14 @@ dotenv.config()
 class App {
   constructor() {
     this.app = express()
-    this.app.use(cors()) // dentro tem que colocar por exemplo www.deuburger.com.br
+
+    this.app.use(
+      cors({
+        origin: process.env.FRONTEND_URL, // Define o domínio permitido
+        methods: ['GET', 'POST', 'PUT', 'DELETE'], // Define os métodos permitidos
+        allowedHeaders: ['Content-Type', 'Authorization'], // Define os headers permitidos
+      }),
+    ) // dentro tem que colocar por exemplo www.deuburger.com.br
     this.middlewares()
     this.routes()
   }
